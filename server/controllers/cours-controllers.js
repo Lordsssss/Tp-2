@@ -95,6 +95,7 @@ const supprimerCours = async (requete, reponse, next) => {
   } catch {
     return next(new HttpErreur("Erreur lors de la suppression du cours", 500));
   }
+  
 
   const teacherId = cours.prof;
   let teacher;
