@@ -90,6 +90,7 @@ const supprimerCours = async (requete, reponse, next) => {
       console.log(etudiant)
       etudiant.listeCours.pull(cours._id);
       await etudiant.save();
+      
     }));
     await Cours.findByIdAndRemove(coursId);
   } catch {
