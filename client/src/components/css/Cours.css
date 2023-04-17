@@ -1,0 +1,80 @@
+.cours__elements{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-style: solid;
+  border-width: 0.01rem;
+  border-radius: 5px;
+  border-color: gray;
+}
+.cours__text{
+  margin: 10px;
+  font-weight: bold;
+}
+.cours__id{
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+  background-color: rgb(209 250 229);
+}
+.btn {
+  margin-left: auto; 
+  margin-right: 0;
+  margin: 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: rgb(209 250 229);
+    color: black;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Darker background on mouse-over */
+  .btn:hover {
+    border-color: red;
+    color: red;
+  }
+  .btn-outline-danger {
+    margin-left: auto; 
+    margin-right: 0;
+      background-color: transparent;
+      border-radius: 5px;
+      border-color: grey;
+      color: grey;
+      padding: 12px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    /* Darker background on mouse-over */
+    .btn-outline-danger:hover {
+      border-color: red;
+      color: red;
+    }
+  .input{
+    background-color: transparent;
+    border-radius: 5px;
+    border-color: rgb(209 250 229);
+    color: black;
+    align-self: center;
+  }
+  .input:focus{
+    color:black;
+  }
+  .cours__formGroup{
+    display: flex;
+  }
+  .cours__form{
+    color: black;
+    border-color: rgb(209 250 229);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    height: 150px;
+    width: 175px;
+    padding: 10px;
+    margin: 20px;
+  }
