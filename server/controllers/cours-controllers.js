@@ -60,17 +60,14 @@ const creerCours = async (requete, reponse, next) => {
     titre,
     prof,
   });
-  console.log("1")
   try {
     await nouveauCours.save({});
     prof.listeCours.push(nouveauCours);
     await prof.save({});
-    console.log("1")
   } catch (err) {
     return next(new HttpErreur("Erreur lors de la création du cours", 500));
   }
   try{
-    console.log("test")
     // Erreur de récursivité lors de la première création d'un cours pour un prof
     // reponse.status(200).json({ cours: nouveauCours.toObject({ getters: true }) });
     reponse.status(200).json("Le prof a été bien créer");
@@ -126,15 +123,12 @@ const updateCours = async (requete, reponse, next) => {
   let cours;
   let prof;
   try {
-    console.log("1")
     cours = await Cours.findById(coursId);
     const oldProfId = cours.prof;
     const oldProf = await Prof.findById(oldProfId);
     oldProf.listeCours.pull(cours);
     await oldProf.save();
-    console.log("2")
   } catch {
-    console.log("3")
     return next(
       new HttpErreur(
         "Erreur lors de la mise à jour de la liste de cours du prof",
@@ -143,21 +137,17 @@ const updateCours = async (requete, reponse, next) => {
     );
   }
   try {
-    console.log("4")
     cours.titre = titre;
     prof = await Prof.findById(profId);
     cours.prof = prof;
     prof.listeCours.push(cours);
     await prof.save();
     await cours.save();
-    console.log("5")
   } catch {
-    console.log("6")
     return next(
       new HttpErreur("Erreur lors de la mise à jour de la place", 500)
     );
   }
-  console.log("7")
   reponse.status(200).json({ cours: cours.toObject({ getters: true }) });
 };
 
