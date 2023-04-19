@@ -4,7 +4,7 @@ const HttpErreur = require("../models/HttpErreur");
 const etudiant = require("../models/etudiant");
 
 const afficherCoursById = async (requete, reponse, next) => {
-  const coursId = requete.body.profId;
+  const coursId = requete.body.coursId;
   let cours;
   try {
     cours = await Cours.findById(coursId);
@@ -72,7 +72,8 @@ const creerCours = async (requete, reponse, next) => {
   try{
     console.log("test")
     // Erreur de récursivité lors de la première création d'un cours pour un prof
-    reponse.status(200).json({ cours: nouveauCours.toObject({ getters: true }) });
+    // reponse.status(200).json({ cours: nouveauCours.toObject({ getters: true }) });
+    reponse.status(200).json("Le prof a été bien créer");
   }catch(err){
     console.log(err);
   }
@@ -90,7 +91,7 @@ const supprimerCours = async (requete, reponse, next) => {
       console.log(etudiant)
       etudiant.listeCours.pull(cours._id);
       await etudiant.save();
-      
+
     }));
     await Cours.findByIdAndRemove(coursId);
   } catch {
@@ -125,12 +126,15 @@ const updateCours = async (requete, reponse, next) => {
   let cours;
   let prof;
   try {
+    console.log("1")
     cours = await Cours.findById(coursId);
     const oldProfId = cours.prof;
     const oldProf = await Prof.findById(oldProfId);
     oldProf.listeCours.pull(cours);
     await oldProf.save();
+    console.log("2")
   } catch {
+    console.log("3")
     return next(
       new HttpErreur(
         "Erreur lors de la mise à jour de la liste de cours du prof",
@@ -139,24 +143,23 @@ const updateCours = async (requete, reponse, next) => {
     );
   }
   try {
+    console.log("4")
     cours.titre = titre;
     prof = await Prof.findById(profId);
     cours.prof = prof;
     prof.listeCours.push(cours);
     await prof.save();
     await cours.save();
+    console.log("5")
   } catch {
+    console.log("6")
     return next(
       new HttpErreur("Erreur lors de la mise à jour de la place", 500)
     );
   }
-  reponse.status(200).json({ 
-    titre: cours.titre,
-    Prof: profId,
-    etudiant: cours.listeEtudiants.map()
-   });
+  console.log("7")
+  reponse.status(200).json({ cours: cours.toObject({ getters: true }) });
 };
-
 
 
 exports.creerCours = creerCours;
